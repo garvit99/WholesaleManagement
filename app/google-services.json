@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "152885842791",
+    "firebase_url": "https://wholesalemanagementsystem.firebaseio.com",
+    "project_id": "wholesalemanagementsystem",
+    "storage_bucket": "wholesalemanagementsystem.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:152885842791:android:99c24a933bc54a5521d5c2",
+        "android_client_info": {
+          "package_name": "com.example.wholesalemanagementsystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "152885842791-m3mp959j96lrmcd4b6m0fogfdu2l0p2t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCzP8T21lACBSk1jZPL9w8ySIlMlLRhSk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "152885842791-m3mp959j96lrmcd4b6m0fogfdu2l0p2t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
