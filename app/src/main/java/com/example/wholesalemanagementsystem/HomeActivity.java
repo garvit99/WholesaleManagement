@@ -1,5 +1,6 @@
 package com.example.wholesalemanagementsystem;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -99,6 +100,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_login:
                 fragment = new FragmentLogin();
+                Intent in=new Intent(HomeActivity.this,LoginActivity.class);
+                startActivity(in);
                 break;
             case R.id.nav_order:
                 fragment = new FragmentOrder();

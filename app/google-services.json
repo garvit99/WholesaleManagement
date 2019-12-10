@@ -1,34 +1,42 @@
 {
   "project_info": {
-    "project_number": "152885842791",
-    "firebase_url": "https://wholesalemanagementsystem.firebaseio.com",
-    "project_id": "wholesalemanagementsystem",
-    "storage_bucket": "wholesalemanagementsystem.appspot.com"
+    "project_number": "484974881800",
+    "firebase_url": "https://wholesalemanagement.firebaseio.com",
+    "project_id": "wholesalemanagement",
+    "storage_bucket": "wholesalemanagement.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:152885842791:android:99c24a933bc54a5521d5c2",
+        "mobilesdk_app_id": "1:484974881800:android:118a6c3f43adf403e2f5bd",
         "android_client_info": {
           "package_name": "com.example.wholesalemanagementsystem"
         }
       },
       "oauth_client": [
         {
-          "client_id": "152885842791-m3mp959j96lrmcd4b6m0fogfdu2l0p2t.apps.googleusercontent.com",
+          "client_id": "484974881800-dfh0sad3u7ljrf8cuf9v5t1s38hsteub.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wholesalemanagementsystem",
+            "certificate_hash": "94027228a0ce80020f20591b862d82a5af395d24"
+          }
+        },
+        {
+          "client_id": "484974881800-7pukartqc83c5iacnb568tmc40gaf8ks.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCCzP8T21lACBSk1jZPL9w8ySIlMlLRhSk"
+          "current_key": "AIzaSyB4YgI--2P3VO1XEFLWCtYh5pKvvLuEuYY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "152885842791-m3mp959j96lrmcd4b6m0fogfdu2l0p2t.apps.googleusercontent.com",
+              "client_id": "484974881800-7pukartqc83c5iacnb568tmc40gaf8ks.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
