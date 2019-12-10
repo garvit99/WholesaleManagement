@@ -14,6 +14,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import androidx.navigation.ui.AppBarConfiguration;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -98,11 +100,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_home:
                 fragment = new FragmentHome();
                 break;
-            case R.id.nav_login:
-                fragment = new FragmentLogin();
-                Intent in=new Intent(HomeActivity.this,LoginActivity.class);
-                startActivity(in);
-                break;
+            case R.id.nav_logout:
+                   FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                    if(mAuth.getCurrentUser() != null) {
+                        mAuth.signOut();
+                    }
+                    startActivity(new Intent(this, LoginActivity.class));
+                    finish();
+                    break;
             case R.id.nav_order:
                 fragment = new FragmentOrder();
                 break;
