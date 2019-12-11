@@ -1,6 +1,7 @@
 package com.example.wholesalemanagementsystem;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -53,7 +54,7 @@ public class CustomAdapter extends BaseAdapter{
     public View getView(final int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
         Holder holder=new Holder();
-        View rowView;
+        final View rowView;
 
         rowView = inflater.inflate(R.layout.row_grid, null);
         holder.os_text =(TextView) rowView.findViewById(R.id.textView);
@@ -67,7 +68,10 @@ public class CustomAdapter extends BaseAdapter{
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Toast.makeText(context, "You Clicked "+result[position], Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "You Clicked "+result[position], Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(rowView.getContext(),CartActivity.class);
+                intent.putExtra("position",position);
+                rowView.getContext().startActivity(intent);
             }
         });
 
