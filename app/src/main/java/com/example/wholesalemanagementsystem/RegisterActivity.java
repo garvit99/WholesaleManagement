@@ -16,186 +16,116 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText retailer, shop, certification, city, phone, alternate, email, address, aadhar, pan, password, repassword;
+    EditText retailer, shop, certification, city, phone, alternate, email, address, aadhar, pan, password,repass;
     Button submit;
+    private DatabaseReference mFirebaseDatabase;
+    private FirebaseDatabase mFirebaseInstance;
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
     private String mUserId;
-    private DatabaseReference databaseReference;
-   private FirebaseDatabase firebaseDatabase;
-   private FirebaseAuth firebaseAuth;
-    private  FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        retailer=findViewById(R.id.et_retailer);
-        shop=findViewById(R.id.et_shop);
-        certification=findViewById(R.id.et_certification);
-        city=findViewById(R.id.et_city);
-        phone=findViewById(R.id.et_phone);
-        alternate=findViewById(R.id.et_alternate);
+        retailer = findViewById(R.id.et_retailer);
+        shop = findViewById(R.id.et_shop);
+        certification = findViewById(R.id.et_certification);
+        city = findViewById(R.id.et_city);
+        phone = findViewById(R.id.et_phone);
+        alternate = findViewById(R.id.et_alternate);
+
+        address = findViewById(R.id.et_address);
+        aadhar = findViewById(R.id.et_aadhar);
+        pan = findViewById(R.id.et_pan);
+
         email=findViewById(R.id.et_email);
-        address=findViewById(R.id.et_address);
-        aadhar=findViewById(R.id.et_aadhar);
-        pan=findViewById(R.id.et_pan);
         password=findViewById(R.id.et_password);
-        repassword=findViewById(R.id.et_repassword);
-        submit=findViewById(R.id.submit);
-        firebaseAuth = FirebaseAuth.getInstance();
-        databaseReference = FirebaseDatabase.getInstance().getReference("users");
+        repass=findViewById(R.id.et_repassword);
 
 
-        submit.setOnClickListener(new View.OnClickListener()
-        {
+        submit = findViewById(R.id.submit);
+
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        mFirebaseDatabase = FirebaseDatabase.getInstance().getReference("users");
+        //mFirebaseInstance = FirebaseDatabase.getInstance();
+
+        submit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                final String Retailer=retailer.getText().toString();
-                final String Shop=shop.getText().toString();
-                final String Certification= certification.getText().toString();
-                final String City=city.getText().toString();
-                final String Phone= phone.getText().toString();
-                final String Alternate= (alternate.getText().toString());
-                final String Email=email.getText().toString();
-                final String Address=address.getText().toString();
-                final String  Aadhar= (aadhar.getText().toString());
-                final String Pan=pan.getText().toString();
-                String Password=password.getText().toString();
-                String Repassword=repassword.getText().toString();
+            public void onClick(View v) {
+
+                final String Retailer = retailer.getText().toString();
+                final String Shop = shop.getText().toString();
+                final String Certification = certification.getText().toString();
+                final String City = city.getText().toString();
+                final String Phone = phone.getText().toString();
+                final String Alternate = (alternate.getText().toString());
+                final String Email = email.getText().toString();
+                final String Address = address.getText().toString();
+                final String Aadhar = (aadhar.getText().toString());
+                final String Pan = pan.getText().toString();
+                String Password = password.getText().toString();
+                String Repassword=repass.getText().toString();
 
 
-                if(TextUtils.isEmpty(Retailer))
+
+
+
+
+
+                                    if(!Password.equals(Repassword))
                 {
-                    Toast.makeText(RegisterActivity.this,"Please Enter Name",Toast.LENGTH_LONG);
+                    Toast.makeText(RegisterActivity.this,"PASSWORD DONT MATCH!",Toast.LENGTH_LONG).show();
                     return;
                 }
-
-                if(TextUtils.isEmpty(Shop))
-                {
-                    Toast.makeText(RegisterActivity.this,"Please Shop Name",Toast.LENGTH_LONG);
-                    return;
-                }
-
-                if(TextUtils.isEmpty(Certification))
-                {
-                    Toast.makeText(RegisterActivity.this,"Please Enter Certification no.",Toast.LENGTH_LONG);
-                    return;
-                }
-
-                if(TextUtils.isEmpty(City))
-                {
-                    Toast.makeText(RegisterActivity.this,"Please Enter City",Toast.LENGTH_LONG);
-                    return;
-                }
-
-                if(TextUtils.isEmpty(Phone))
-                {
-                    Toast.makeText(RegisterActivity.this,"Please Enter Phone no.",Toast.LENGTH_LONG);
-                    return;
-                }
-
-                if(TextUtils.isEmpty(Email))
-                {
-                    Toast.makeText(RegisterActivity.this,"Please Enter Email",Toast.LENGTH_LONG);
-                    return;
-                }
-
-                if(TextUtils.isEmpty(Address))
-                {
-                    Toast.makeText(RegisterActivity.this,"Please Enter Address",Toast.LENGTH_LONG);
-                    return;
-                }
-
-                if(TextUtils.isEmpty(Aadhar))
-                {
-                    Toast.makeText(RegisterActivity.this,"Please Enter Aadhar ID",Toast.LENGTH_LONG);
-                    return;
-                }
-
-                if(TextUtils.isEmpty(Pan))
-                {
-                    Toast.makeText(RegisterActivity.this,"Please Enter PAN no.",Toast.LENGTH_LONG);
-                    return;
-                }
-
-                if(TextUtils.isEmpty(Password))
-                {
-                    Toast.makeText(RegisterActivity.this,"Please Enter Password",Toast.LENGTH_LONG);
-                    return;
-                }
-
-                if(TextUtils.isEmpty(Repassword))
-                {
-                    Toast.makeText(RegisterActivity.this,"Please Re-Enter Password",Toast.LENGTH_LONG);
-                    return;
-                }
-
-                if(Password!=Repassword)
-                {
-                    Toast.makeText(RegisterActivity.this,"Password are not Matching",Toast.LENGTH_LONG);
-                    return;
-                }
-
-                if(Password.length()<6)
-                {
-                    Toast.makeText(RegisterActivity.this,"Password must be >6 digits!",Toast.LENGTH_LONG);
-                    return;
-                }
+                mUserId = mFirebaseDatabase.push().getKey();
+                User user = new User(Retailer, Shop, Certification, City, Phone, Alternate, Email, Address, Aadhar, Pan, Password);
 
 
-                firebaseAuth.createUserWithEmailAndPassword(Email, Password)
+
+                mFirebaseDatabase.child(mUserId).setValue(user);
+
+                Toast.makeText(getApplicationContext(),"Data Added",Toast.LENGTH_LONG).show();
+                mFirebaseAuth.createUserWithEmailAndPassword(Email,Password)
                         .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-
-                                    mUserId=firebaseUser.getUid();
-
-                                    User user = new User(
-                                            Retailer,
-                                            Shop,
-                                            Certification,
-                                            City,
-                                            Phone,
-                                            Alternate,
-                                            Email,
-                                            Address,
-                                            Aadhar,
-                                            Pan
-                                    );
-
-
-
-                                    FirebaseDatabase.getInstance().getReference("users")
-                                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                            .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task)
-                                        {
-                                            Toast.makeText(RegisterActivity.this,"Registered Successfully!",Toast.LENGTH_LONG);
-                                            startActivity(new Intent(getApplicationContext(),HomeActivity.class));
-                                        }
-                                    });
-
-
+                                Toast.makeText(RegisterActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+                                // If sign in fails, display a message to the user. If sign in succeeds
+                                // the auth state listener will be notified and logic to handle the
+                                // signed in user can be handled in the listener.
+                                if (!task.isSuccessful()) {
+                                    Toast.makeText(RegisterActivity.this, "Authentication failed." + task.getException(),
+                                            Toast.LENGTH_SHORT).show();
+                                } else {
+                                    startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
+                                    finish();
                                 }
-                                else {
-
-                                }
-
-                                // ...
                             }
                         });
+
+
+
+
 
             }
         });
 
 
     }
+
+
+
+
 }

@@ -1,24 +1,21 @@
 package com.example.wholesalemanagementsystem;
 
-public class User
-{
+public class User {
 
 
-    public String  retailer;
+    public String retailer;
     public String shop;
     public String certification;
     public String city;
     public String phone;
-    public String  alternate;
+    public String alternate;
     public String email;
     public String address;
     public String aadhar;
     public String pan;
     public String password;
-    public String repassword;
 
-    public User(String retailer, String shop, String certification, String city, String phone, String alternate, String email, String address, String aadhar, String pan) {
-
+    public User(String retailer, String shop, String certification, String city, String phone, String alternate, String email, String address, String aadhar, String pan, String password) {
         this.retailer = retailer;
         this.shop = shop;
         this.certification = certification;
@@ -29,10 +26,10 @@ public class User
         this.address = address;
         this.aadhar = aadhar;
         this.pan = pan;
-
+        this.password = password;
     }
 
-    public User(String id, String retailer, String shop, String certification, String city, String phone, String alternate, String email, String address, String aadhar, String pan, String password, String repassword) {
+    public User() {
     }
 
     public String getRetailer() {
@@ -122,14 +119,4 @@ public class User
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public String getRepassword() {
-        return repassword;
-    }
-
-    public void setRepassword(String repassword) {
-        this.repassword = repassword;
-    }
 }
-
-

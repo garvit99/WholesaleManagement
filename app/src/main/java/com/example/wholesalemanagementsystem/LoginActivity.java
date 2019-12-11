@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private FirebaseDatabase mFirebaseInstance;
     private FirebaseAuth firebaseAuth;
-
+    private FirebaseUser mFirebaseUser;
 
 
     @Override
@@ -44,6 +45,13 @@ public class LoginActivity extends AppCompatActivity {
         register=findViewById(R.id.button_register);
 
         firebaseAuth=FirebaseAuth.getInstance();
+        if (firebaseAuth.getCurrentUser() != null) {
+            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+            finish();
+        }
+        firebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = firebaseAuth.getCurrentUser();
+
 
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -52,15 +60,15 @@ public class LoginActivity extends AppCompatActivity {
 
                 String Email = email.getText().toString().trim();
                 String Password = password.getText().toString().trim();
-
+                Toast.makeText(LoginActivity.this, Email+Password, Toast.LENGTH_SHORT).show();
                 if(TextUtils.isEmpty(Email))
                 {
-                    Toast.makeText(LoginActivity.this,"Please Enter Email",Toast.LENGTH_LONG);
+                    Toast.makeText(LoginActivity.this,"Please Enter Email",Toast.LENGTH_LONG).show();
                     return;
                 }
                 if(TextUtils.isEmpty(Password))
                 {
-                    Toast.makeText(LoginActivity.this,"Please Enter Password",Toast.LENGTH_LONG);
+                    Toast.makeText(LoginActivity.this,"Please Enter Password",Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -73,7 +81,8 @@ public class LoginActivity extends AppCompatActivity {
 
                                 }
                                 else {
-                                Toast.makeText(LoginActivity.this,"Wrong Password or UserEmail does not Exist",Toast.LENGTH_LONG);
+                                Toast.makeText(LoginActivity.this,"Wrong Password or UserEmail does not Exist",Toast.LENGTH_LONG).show();
+                                return;
                                 }
 
 
