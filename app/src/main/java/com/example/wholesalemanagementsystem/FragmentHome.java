@@ -22,16 +22,20 @@ public class FragmentHome extends Fragment {
             "Symbian",
             "Windows 10",
             "Windows XP",
+            "Lenevo Store",
+            "Universal Store"
     };
     public static int[] osImages = {
-            R.drawable.splash,
-            R.drawable.splash,
-            R.drawable.splash,
-            R.drawable.splash,
-            R.drawable.splash,
-            R.drawable.splash,
-            R.drawable.splash,
-            R.drawable.splash
+            R.drawable.a,
+            R.drawable.b,
+            R.drawable.c,
+            R.drawable.d,
+            R.drawable.e,
+            R.drawable.a,
+            R.drawable.b,
+            R.drawable.c,
+            R.drawable.d,
+            R.drawable.e
     };
     @Nullable
     @Override
