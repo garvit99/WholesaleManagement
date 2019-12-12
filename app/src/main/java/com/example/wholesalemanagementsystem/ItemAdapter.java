@@ -10,12 +10,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.List;
 
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>{
 public static int sum=0;
+public static ArrayList<String> list = new ArrayList<String>();
     public static Item[] listdata;
     //public static List<Item> selecteditems;
 
@@ -53,9 +55,10 @@ public static int sum=0;
         if(!hasFocus) {
             EditText ed = holder.relativeLayout.findViewById(R.id.quantity);
             TextView pr=holder.relativeLayout.findViewById(R.id.price);
+            TextView name=holder.relativeLayout.findViewById(R.id.name);
+            list.add(name.getText().toString()+" : "+ed.getText().toString()+" Units");
+            System.out.println(list);
             sum+=Integer.parseInt(ed.getText().toString())*Integer.parseInt(pr.getText().toString());
-
-            Toast.makeText(v.getContext(), "Total price: "+sum, Toast.LENGTH_SHORT).show();
 
         }
             }

@@ -21,6 +21,13 @@
             android:label=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".ProcessOrder"
+            android:label=".RegisterActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+
+
+        <activity
             android:name=".RegisterActivity"
             android:label=".RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar" />
