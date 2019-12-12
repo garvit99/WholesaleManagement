@@ -28,9 +28,10 @@ import com.google.firebase.database.ValueEventListener;
 public class LoginActivity extends AppCompatActivity {
 
     EditText email, password;
+    private String mUserId;
     Button login, register;
-    private DatabaseReference databaseReference;
-    private FirebaseDatabase mFirebaseInstance;
+    private DatabaseReference mFirebaseReference;
+    private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser mFirebaseUser;
 
@@ -38,6 +39,11 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mFirebaseReference= FirebaseDatabase.getInstance().getReference();
+
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+
+
         setContentView(R.layout.activity_login);
         email=findViewById(R.id.et_email);
         password=findViewById(R.id.et_password);
@@ -59,16 +65,14 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 String Email = email.getText().toString().trim();
+
                 String Password = password.getText().toString().trim();
-                Toast.makeText(LoginActivity.this, Email+Password, Toast.LENGTH_SHORT).show();
-                if(TextUtils.isEmpty(Email))
-                {
-                    Toast.makeText(LoginActivity.this,"Please Enter Email",Toast.LENGTH_LONG).show();
+                if (TextUtils.isEmpty(Email)) {
+                    Toast.makeText(LoginActivity.this, "Please Enter Email", Toast.LENGTH_LONG).show();
                     return;
                 }
-                if(TextUtils.isEmpty(Password))
-                {
-                    Toast.makeText(LoginActivity.this,"Please Enter Password",Toast.LENGTH_LONG).show();
+                if (TextUtils.isEmpty(Password)) {
+                    Toast.makeText(LoginActivity.this, "Please Enter Password", Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -77,35 +81,63 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                startActivity(new Intent(LoginActivity.this,HomeActivity.class));
 
+                                    mFirebaseUser = firebaseAuth.getCurrentUser();
+                                    mUserId = mFirebaseUser.getUid();
+
+
+
+                                 //   Toast.makeText(LoginActivity.this, "hula "+mUserId, Toast.LENGTH_LONG).show();
+
+                                    startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+
+                                } else {
+                                    Toast.makeText(LoginActivity.this, "Wrong Password or UserEmail does not Exist", Toast.LENGTH_LONG).show();
+                                    return;
                                 }
-                                else {
-                                Toast.makeText(LoginActivity.this,"Wrong Password or UserEmail does not Exist",Toast.LENGTH_LONG).show();
-                                return;
-                                }
 
 
+                                mFirebaseReference.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                      //  Toast.makeText(LoginActivity.this, "su"+mUserId, Toast.LENGTH_SHORT).show();
+                                       String retailer = dataSnapshot.getValue().toString();
+                                       Toast.makeText(LoginActivity.this, "first"+retailer, Toast.LENGTH_LONG).show();
+                                        //header1.setText(name);
+                                        //header2.setText(enroll);
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+                                        //System.out.println("The read failed: " + databaseError.getCode());
+                                    }
+                                });
                             }
+
+                            private void showData(DataSnapshot dataSnapshot)
+                            {
+                                for(DataSnapshot ds : dataSnapshot.getChildren())
+                                {
+                                    User user = dataSnapshot.getValue(User.class);
+                                    String name = ds.child(mUserId).getValue(User.class).getRetailer();
+                                    Toast.makeText(LoginActivity.this,"seccondddddd "+name,Toast.LENGTH_LONG).show();
+
+
+            /*name=user.getName();
+            enroll=user.getEnroll();
+            contact=user.getContact();
+            branch=user.getBranch();
+            city=user.getCity();
+            cgpa=user.getCgpa();*/
+
+                                }
+                            }
+
+
+
                         });
 
-
-            }
-        });
+            }});
 
 
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in=new Intent(LoginActivity.this,RegisterActivity.class);
-                startActivity(in);
-            }
-        });
-
-
-    }
-
-
-
-    }
-
+    }}

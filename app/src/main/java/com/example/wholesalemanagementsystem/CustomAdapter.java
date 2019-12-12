@@ -56,7 +56,7 @@ public class CustomAdapter extends BaseAdapter{
         View rowView;
 
         rowView = inflater.inflate(R.layout.row_grid, null);
-        holder.os_text =(TextView) rowView.findViewById(R.id.textView);
+        holder.os_text =(TextView) rowView.findViewById(R.id.profileEmail);
         holder.os_img =(ImageView) rowView.findViewById(R.id.imageView);
 
         holder.os_text.setText(result[position]);
