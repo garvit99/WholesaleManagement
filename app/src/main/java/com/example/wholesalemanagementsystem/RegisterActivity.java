@@ -26,8 +26,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     EditText retailer, shop, certification, city, phone, alternate, email, address, aadhar, pan, password,repass;
     Button submit;
-    private DatabaseReference mFirebaseDatabase;
-    private FirebaseDatabase mFirebaseInstance;
+    private DatabaseReference mFirebaseReference;
+    private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private String mUserId;
@@ -58,7 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
-        mFirebaseDatabase = FirebaseDatabase.getInstance().getReference("users");
+        mFirebaseReference = FirebaseDatabase.getInstance().getReference("users");
         //mFirebaseInstance = FirebaseDatabase.getInstance();
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -89,12 +89,12 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this,"PASSWORD DONT MATCH!",Toast.LENGTH_LONG).show();
                     return;
                 }
-                mUserId = mFirebaseDatabase.push().getKey();
+                mUserId = mFirebaseReference.push().getKey();
                 User user = new User(Retailer, Shop, Certification, City, Phone, Alternate, Email, Address, Aadhar, Pan, Password);
 
 
 
-                mFirebaseDatabase.child(mUserId).setValue(user);
+                mFirebaseReference.child(mUserId).setValue(user);
 
                 Toast.makeText(getApplicationContext(),"Data Added",Toast.LENGTH_LONG).show();
                 mFirebaseAuth.createUserWithEmailAndPassword(Email,Password)

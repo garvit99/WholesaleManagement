@@ -15,7 +15,7 @@ import java.util.List;
 
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>{
-
+int sum=0;
     public static Item[] listdata;
     //public static List<Item> selecteditems;
 
@@ -34,8 +34,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>{
         return viewHolder;
     }
 
+
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         final Item myListData = listdata[position];
 
 
@@ -44,14 +45,33 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>{
         holder.image.setImageResource(listdata[position].getImgId());
         holder.price.setText(listdata[position].getPrice()+"");
         holder.quantity.setText(listdata[position].getQuantity()+"");
-        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+
+
+
+        holder.relativeLayout.findViewById(R.id.quantity).setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+
+        if(!hasFocus) {
+            EditText ed = holder.relativeLayout.findViewById(R.id.quantity);
+            TextView pr=holder.relativeLayout.findViewById(R.id.price);
+            sum+=Integer.parseInt(ed.getText().toString())*Integer.parseInt(pr.getText().toString());
+
+            Toast.makeText(v.getContext(), "Total price: "+sum, Toast.LENGTH_SHORT).show();
+
+        }
+            }
+        });
+/*        holder.relativeLayout.findViewById(R.id.quantity).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //total+=listdata[position].getPrice()*listdata[position].getQuantity();
-                Toast.makeText(view.getContext(),"click on item: "+listdata[position].getQuantity(),Toast.LENGTH_LONG).show();
+             //   Toast.makeText(view.getContext(),"click on item: "+holder.relativeLayout.findViewById(R.id.quantity).toString(),Toast.LENGTH_LONG).show();
+                EditText ed=holder.relativeLayout.findViewById(R.id.quantity);
+                Toast.makeText(view.getContext(), ed.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
-    }
+  */  }
 
 
     @Override

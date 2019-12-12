@@ -16,10 +16,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import androidx.navigation.ui.AppBarConfiguration;
 
@@ -27,13 +30,24 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     //private AppBarConfiguration mAppBarConfiguration;
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference databaseReference;
+    private DatabaseReference mFirebaseReference;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser mFirebaseUser;
+    String currentUserID;
 
     TextView headername,headeremail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        mFirebaseReference= FirebaseDatabase.getInstance().getReference();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseAuth=FirebaseAuth.getInstance();
+        mFirebaseUser = firebaseAuth.getCurrentUser();
+
+
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         /*FloatingActionButton fab = findViewById(R.id.fab);
@@ -69,8 +83,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START))
+        {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
@@ -154,4 +169,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
+
+
 }
+

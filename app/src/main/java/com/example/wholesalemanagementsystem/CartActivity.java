@@ -18,7 +18,7 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         Button btn_placeorder=(Button)findViewById(R.id.btn_placeorder);
-        final TextView tv_total=(TextView)findViewById(R.id.tv_total);
+        TextView tv_total=(TextView)findViewById(R.id.tv_total);
 
         Item[] myListData = new Item[] {
                 new Item("Product A",R.drawable.a,10,0),
@@ -39,10 +39,10 @@ public class CartActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_cart);
         final ItemAdapter adapter = new ItemAdapter(myListData);
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-
 
 
     }
