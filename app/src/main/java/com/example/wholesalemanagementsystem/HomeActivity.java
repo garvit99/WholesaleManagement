@@ -20,6 +20,8 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -33,8 +35,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private DatabaseReference mFirebaseReference;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser mFirebaseUser;
-    String currentUserID;
-
+    private String currentUserID;
+    String show_retailer;
     TextView headername,headeremail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         firebaseAuth=FirebaseAuth.getInstance();
         mFirebaseUser = firebaseAuth.getCurrentUser();
+        currentUserID=firebaseAuth.getUid();
+        mFirebaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                show_retailer=dataSnapshot.child(currentUserID).child("retailer").getValue(String.class);
+                return;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
 
@@ -68,15 +83,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         View hView =  navigationView.getHeaderView(0);
-      //  headername =findViewById(R.id.profileName);
+        //  headername =findViewById(R.id.profileName);
         //headeremail=findViewById(R.id.profileEmail);
 
 
         navigationView.setNavigationItemSelectedListener(this);
         displaySelectedScreen(R.id.nav_home);
-
-
-
 
 
 
@@ -140,6 +152,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_contactus:
                 fragment = new FragmentContactUs();
+                Toast.makeText(HomeActivity.this,"123"+show_retailer,Toast.LENGTH_LONG).show();
+
                 break;
             case R.id.nav_share:
                 fragment = new FragmentShare();

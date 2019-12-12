@@ -15,7 +15,7 @@ import java.util.List;
 
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>{
-int sum=0;
+public static int sum=0;
     public static Item[] listdata;
     //public static List<Item> selecteditems;
 
@@ -38,8 +38,6 @@ int sum=0;
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final Item myListData = listdata[position];
-
-
 
         holder.name.setText(listdata[position].getName());
         holder.image.setImageResource(listdata[position].getImgId());
@@ -75,9 +73,11 @@ int sum=0;
 
 
     @Override
+
     public int getItemCount() {
         return listdata.length;
     }
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView image;
