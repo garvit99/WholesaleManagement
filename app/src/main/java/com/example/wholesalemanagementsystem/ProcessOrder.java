@@ -1,8 +1,10 @@
 package com.example.wholesalemanagementsystem;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -18,6 +20,13 @@ public class ProcessOrder extends AppCompatActivity {
         String listi= String.valueOf(ItemAdapter.list);
         bt.setText(String.valueOf(k));
         bill.setText(listi);
+        bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(ProcessOrder.this,Splash_Placed.class);
+                startActivity(intent);
+            }
+        });
 
 
 
