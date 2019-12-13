@@ -36,18 +36,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseAuth firebaseAuth;
     private FirebaseUser mFirebaseUser;
     private String currentUserID;
-    String show_retailer;
+    String show_retailer,email;
     TextView headername,headeremail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        mFirebaseReference= FirebaseDatabase.getInstance().getReference("users");
+        mFirebaseReference= FirebaseDatabase.getInstance().getReference();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         firebaseAuth=FirebaseAuth.getInstance();
         mFirebaseUser = firebaseAuth.getCurrentUser();
         currentUserID=firebaseAuth.getUid();
+
 
 
 
@@ -64,12 +65,26 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         View hView =  navigationView.getHeaderView(0);
-        //  headername =findViewById(R.id.profileName);
-        //headeremail=findViewById(R.id.profileEmail);
 
+         headeremail =hView.findViewById(R.id.profileEmail);
+        //headeremail=findViewById(R.id.profileEmail);
 
         navigationView.setNavigationItemSelectedListener(this);
         displaySelectedScreen(R.id.nav_home);
+        mFirebaseReference.child(currentUserID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                email=mFirebaseUser.getEmail();
+                headeremail.setText(email);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
 
@@ -133,7 +148,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_contactus:
                 fragment = new FragmentContactUs();
-                Toast.makeText(HomeActivity.this,"123"+show_retailer,Toast.LENGTH_LONG).show();
+                Toast.makeText(HomeActivity.this,email,Toast.LENGTH_LONG).show();
 
                 break;
             case R.id.nav_share:

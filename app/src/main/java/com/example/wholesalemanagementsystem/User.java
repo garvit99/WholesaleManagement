@@ -32,7 +32,8 @@ public class User {
     public User() {
     }
 
-    public String getRetailer() {
+    public String getRetailer()
+    {
         return retailer;
     }
 
