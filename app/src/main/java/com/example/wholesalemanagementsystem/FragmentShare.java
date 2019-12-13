@@ -1,5 +1,6 @@
 package com.example.wholesalemanagementsystem;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,43 +11,29 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 
-public class FragmentShare extends Fragment {
-    private GridView gridView;
-    private ImageView imageView;
-    public static String[] osNameList = {
-            "Android",
-            "iOS",
-            "Linux",
-            "MacOS",
-            "MS DOS",
-            "Symbian",
-            "Windows 10",
-            "Windows XP",
-    };
-    public static int[] osImages = {
-            R.drawable.splash,
-            R.drawable.splash,
-            R.drawable.splash,
-            R.drawable.splash,
-            R.drawable.splash,
-            R.drawable.splash,
-            R.drawable.splash,
-            R.drawable.splash
-    };
+public class FragmentShare extends Fragment
+{
+
+
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+    {
         View view = inflater.inflate(R.layout.fragment_share, container,
                 false);
-        //GridView gridView = (GridView) view.findViewById(R.id.gridhome);
-        //gridView.setAdapter(new CustomAdapter(view.getContext(),osNameList,osImages));
-
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareBody = "Here is the share content body";
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, "Share via"));
         return view;
     }
 
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
+    {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("SHARE");
     }

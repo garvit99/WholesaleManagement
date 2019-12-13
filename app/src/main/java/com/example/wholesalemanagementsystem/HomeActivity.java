@@ -43,37 +43,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        mFirebaseReference= FirebaseDatabase.getInstance().getReference();
+        mFirebaseReference= FirebaseDatabase.getInstance().getReference("users");
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         firebaseAuth=FirebaseAuth.getInstance();
         mFirebaseUser = firebaseAuth.getCurrentUser();
         currentUserID=firebaseAuth.getUid();
-        mFirebaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                show_retailer=dataSnapshot.child(currentUserID).child("retailer").getValue(String.class);
-                return;
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
 
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        /*FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-      //  mFirebaseInstance.getReference();
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
