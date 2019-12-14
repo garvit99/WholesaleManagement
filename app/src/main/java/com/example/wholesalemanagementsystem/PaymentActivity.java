@@ -26,6 +26,8 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
         Button button=findViewById(R.id.button);
         Bundle extras=getIntent().getExtras();
         total=extras.getInt("total");
+        ItemAdapter.sum=0;
+        ItemAdapter.list.clear();
         total=total*100;
 
 
