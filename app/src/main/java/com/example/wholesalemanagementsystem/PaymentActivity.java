@@ -59,31 +59,23 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
          * Pass your payment options to the Razorpay Checkout as a JSONObject
          */
         try {
-            JSONObject options = new JSONObject();
+            JSONObject orderRequest = new JSONObject();
 
             /**
              * Merchant Name
              * eg: ACME Corp || HasGeek etc.
              */
-            options.put("name", "Garvit Chhajed");
-
-            /**
-             * Description can be anything
-             * eg: Reference No. #123123 - This order number is passed by you for your internal reference. This is not the `razorpay_order_id`.
-             *     Invoice Payment
-             *     etc.
-             */
-            options.put("description", "Reference No. #123456");
-            options.put("order_id", "order_9A33XWu170gUtm");
-            options.put("currency", "INR");
-
+            orderRequest.put("amount", finaltotal); // amount in the smallest currency unit
+            orderRequest.put("currency", "INR");
+            orderRequest.put("receipt", "order_rcptid_11");
+            orderRequest.put("payment_capture", false);
             /**
              * Amount is always passed in currency subunits
              * Eg: "500" = INR 5.00
              */
-            options.put("amount", finaltotal);
 
-            checkout.open(activity, options);
+
+            checkout.open(activity, orderRequest);
         } catch(Exception e) {
             Log.e(TAG, "Error in starting Razorpay Checkout", e);
         }
@@ -98,6 +90,6 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
     @Override
     public void onPaymentError(int code, String response) {
 
-        Toast.makeText(PaymentActivity.this,"Payment Failure"+code,Toast.LENGTH_LONG).show();
+        Toast.makeText(PaymentActivity.this,"Payment Failure"+code+response,Toast.LENGTH_LONG).show();
     }
 }
