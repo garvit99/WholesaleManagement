@@ -84,7 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-                                    if(!Password.equals(Repassword))
+                if(!Password.equals(Repassword))
                 {
                     Toast.makeText(RegisterActivity.this,"PASSWORD DONT MATCH!",Toast.LENGTH_LONG).show();
                     return;
