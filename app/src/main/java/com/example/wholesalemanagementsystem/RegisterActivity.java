@@ -1,5 +1,6 @@
 package com.example.wholesalemanagementsystem;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -31,7 +32,8 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private String mUserId;
-
+    private User user;
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
         email=findViewById(R.id.et_email);
         password=findViewById(R.id.et_password);
         repass=findViewById(R.id.et_repassword);
-
+        progressDialog= new ProgressDialog(this);
 
         submit = findViewById(R.id.submit);
 
@@ -90,13 +92,11 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
                 mUserId = mFirebaseReference.push().getKey();
-                User user = new User(Retailer, Shop, Certification, City, Phone, Alternate, Email, Address, Aadhar, Pan, Password);
+                 user = new User(Retailer, Shop, Certification, City, Phone, Alternate, Email, Address, Aadhar, Pan, Password);
 
+                 progressDialog.setMessage("Registering Please Wait.....");
+                 progressDialog.show();
 
-
-                mFirebaseReference.child(mUserId).setValue(user);
-
-                Toast.makeText(getApplicationContext(),"Data Added",Toast.LENGTH_LONG).show();
                 mFirebaseAuth.createUserWithEmailAndPassword(Email,Password)
                         .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -105,10 +105,19 @@ public class RegisterActivity extends AppCompatActivity {
                                 // If sign in fails, display a message to the user. If sign in succeeds
                                 // the auth state listener will be notified and logic to handle the
                                 // signed in user can be handled in the listener.
-                                if (!task.isSuccessful()) {
+
+                                if (!task.isSuccessful())
+
+                                {   progressDialog.dismiss();
                                     Toast.makeText(RegisterActivity.this, "Authentication failed." + task.getException(),
                                             Toast.LENGTH_SHORT).show();
-                                } else {
+                                } else
+                                    {
+                                        progressDialog.dismiss();
+                                        String k=Email.substring(0,Email.length()-4);
+                                        mFirebaseReference.child(k).setValue(user);
+
+                                        Toast.makeText(getApplicationContext(),"Data Added",Toast.LENGTH_LONG).show();
                                     startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
                                     finish();
                                 }

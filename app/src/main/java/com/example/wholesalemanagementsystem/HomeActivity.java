@@ -36,18 +36,21 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseAuth firebaseAuth;
     private FirebaseUser mFirebaseUser;
     private String currentUserID;
-    String show_retailer,email;
+    String name,email;
     TextView headername,headeremail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        mFirebaseReference= FirebaseDatabase.getInstance().getReference();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         firebaseAuth=FirebaseAuth.getInstance();
         mFirebaseUser = firebaseAuth.getCurrentUser();
-        currentUserID=firebaseAuth.getUid();
+        mFirebaseReference= FirebaseDatabase.getInstance().getReference();
+        currentUserID= mFirebaseReference.getRoot().getKey();
+
+
+
 
 
 
@@ -67,16 +70,28 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         View hView =  navigationView.getHeaderView(0);
 
          headeremail =hView.findViewById(R.id.profileEmail);
+         headername=hView.findViewById(R.id.profileName);
         //headeremail=findViewById(R.id.profileEmail);
 
         navigationView.setNavigationItemSelectedListener(this);
         displaySelectedScreen(R.id.nav_home);
-        mFirebaseReference.child(currentUserID).addListenerForSingleValueEvent(new ValueEventListener() {
+        email=mFirebaseUser.getEmail();
+        String k=email.substring(0,email.length()-4);
+        mFirebaseReference.child("users").child(k).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                email=mFirebaseUser.getEmail();
+
                 headeremail.setText(email);
+
+//                Toast.makeText(HomeActivity.this,dataSnapshot.child("retailer").toString(), Toast.LENGTH_LONG).show();
+
+                /*String name= dataSnapshot.child("Retailer").getValue(String.class);
+                System.out.println(name);
+                headername.setText(name+"123");*/
+                User user=new User();
+                //name=user.getRetailer();
+                headername.setText(dataSnapshot.child("retailer").getValue().toString());
 
             }
 

@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String Email = email.getText().toString().trim();
+                final String Email = email.getText().toString().trim();
 
                 String Password = password.getText().toString().trim();
                 if (TextUtils.isEmpty(Email)) {
@@ -75,16 +75,17 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Please Enter Password", Toast.LENGTH_LONG).show();
                     return;
                 }
+                String k=Email.substring(0,Email.length()-4);
+                Toast.makeText(LoginActivity.this,k, Toast.LENGTH_SHORT).show();
 
                 firebaseAuth.signInWithEmailAndPassword(Email, Password)
                         .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-
                                     mFirebaseUser = firebaseAuth.getCurrentUser();
                                     mUserId = mFirebaseUser.getUid();
-
+                                    Toast.makeText(LoginActivity.this,"YEH LO"+mUserId, Toast.LENGTH_LONG).show();
 
 
                                  //   Toast.makeText(LoginActivity.this, "hula "+mUserId, Toast.LENGTH_LONG).show();
@@ -102,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                       //  Toast.makeText(LoginActivity.this, "su"+mUserId, Toast.LENGTH_SHORT).show();
                                        String retailer = dataSnapshot.getValue().toString();
-                                       Toast.makeText(LoginActivity.this, "first"+retailer, Toast.LENGTH_LONG).show();
+                                      // Toast.makeText(LoginActivity.this, "first"+retailer, Toast.LENGTH_LONG).show();
                                         //header1.setText(name);
                                         //header2.setText(enroll);
                                     }
@@ -138,6 +139,13 @@ public class LoginActivity extends AppCompatActivity {
                         });
 
             }});
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
     }}
