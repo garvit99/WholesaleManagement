@@ -89,7 +89,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 /*String name= dataSnapshot.child("Retailer").getValue(String.class);
                 System.out.println(name);
                 headername.setText(name+"123");*/
-                User user=new User();
+               // User user=new User();
                 //name=user.getRetailer();
                 headername.setText(dataSnapshot.child("retailer").getValue().toString());
 

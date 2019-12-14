@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     mFirebaseUser = firebaseAuth.getCurrentUser();
                                     mUserId = mFirebaseUser.getUid();
-                                    Toast.makeText(LoginActivity.this,"YEH LO"+mUserId, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(LoginActivity.this,"User Id"+mUserId, Toast.LENGTH_LONG).show();
 
 
                                  //   Toast.makeText(LoginActivity.this, "hula "+mUserId, Toast.LENGTH_LONG).show();
