@@ -12,12 +12,14 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.List;
 
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>{
 public static int sum=0;
-public static ArrayList<String> list = new ArrayList<String>();
+public static Dictionary dictionary=new Hashtable();
+    public static ArrayList<String> list = new ArrayList<String>();
     public static Item[] listdata;
     //public static List<Item> selecteditems;
 
@@ -56,9 +58,7 @@ public static ArrayList<String> list = new ArrayList<String>();
             EditText ed = holder.relativeLayout.findViewById(R.id.quantity);
             TextView pr=holder.relativeLayout.findViewById(R.id.price);
             TextView name=holder.relativeLayout.findViewById(R.id.name);
-            list.add(name.getText().toString()+" : "+ed.getText().toString()+" Units");
-            System.out.println(list);
-            sum+=Integer.parseInt(ed.getText().toString())*Integer.parseInt(pr.getText().toString());
+            dictionary.put(name.getText().toString()+" Net Price: ",+Integer.parseInt(pr.getText().toString())*Integer.parseInt(ed.getText().toString()));
 
         }
             }

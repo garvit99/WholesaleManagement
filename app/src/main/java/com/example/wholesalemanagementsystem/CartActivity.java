@@ -22,20 +22,20 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         Button btn_placeorder=findViewById(R.id.btn_placeorder);
-        final TextView tv_total=(TextView)findViewById(R.id.tv_total);
+
 
 
         Item[] myListData = new Item[] {
-                new Item("Product A",R.drawable.a,10,0),
-                new Item("Product B",R.drawable.b,20,0),
+                new Item("Product A",R.drawable.a,1,0),
+                new Item("Product B",R.drawable.b,2,0),
                 new Item("Product C",R.drawable.c,30,0),
                 new Item("Product D",R.drawable.d,40,0),
                 new Item("Product E",R.drawable.e,50,0),
-                new Item("Product A",R.drawable.a,10,0),
-                new Item("Product B",R.drawable.b,20,0),
-                new Item("Product C",R.drawable.c,30,0),
-                new Item("Product D",R.drawable.d,40,0),
-                new Item("Product E",R.drawable.e,50,0),
+                new Item("Product F",R.drawable.a,10,0),
+                new Item("Product g",R.drawable.b,20,0),
+                new Item("Product H",R.drawable.c,30,0),
+                new Item("Product I",R.drawable.d,40,0),
+                new Item("Product J",R.drawable.e,50,0),
         };
 
 
@@ -57,8 +57,6 @@ public class CartActivity extends AppCompatActivity {
               int k=ItemAdapter.sum;
               System.out.println(k);
               String listi= String.valueOf(ItemAdapter.list);
-              System.out.println("hiiiiiiii"+listi);
-tv_total.setText(listi);
 
           }
       });

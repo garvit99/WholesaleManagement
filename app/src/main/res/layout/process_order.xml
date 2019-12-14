@@ -4,6 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
+
     <Button
         android:id="@+id/btn_process"
         android:layout_gravity="center"
@@ -39,5 +40,11 @@
         android:gravity="center"
         android:text="Your Bill : "
         android:textSize="20dp"></TextView>
+
+    <ListView
+        android:id="@+id/mobile_list"
+        android:layout_width="376dp"
+        android:layout_height="615dp"></ListView>
+
 
 </RelativeLayout>
