@@ -11,14 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".PaymentActivity"></activity>
         <activity android:name=".CartActivity" />
         <activity
             android:name=".HomeActivity"
-            android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity
-            android:name=".Splash_Placed"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
 
@@ -30,9 +26,6 @@
             android:name=".ProcessOrder"
             android:label=".RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
-
-
         <activity
             android:name=".RegisterActivity"
             android:label=".RegisterActivity"
@@ -45,6 +38,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".TakeATourActivity" />
+        <meta-data
+            android:name="com.razorpay.ApiKey"
+            android:value="rzp_test_EHb60eN292iT1q"
+            />
     </application>
 
 </manifest>

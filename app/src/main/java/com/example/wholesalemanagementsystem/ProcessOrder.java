@@ -14,7 +14,7 @@ public class ProcessOrder extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.process_order);
         TextView bill=findViewById(R.id.bill);
-        int k=ItemAdapter.sum;
+        final int k=ItemAdapter.sum;
         Button bt= findViewById(R.id.btn_process);
         System.out.println(k);
         String listi= String.valueOf(ItemAdapter.list);
@@ -23,8 +23,10 @@ public class ProcessOrder extends AppCompatActivity {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(ProcessOrder.this,Splash_Placed.class);
+                Intent intent=new Intent(ProcessOrder.this,PaymentActivity.class);
+                intent.putExtra("total",k);
                 startActivity(intent);
+
             }
         });
 

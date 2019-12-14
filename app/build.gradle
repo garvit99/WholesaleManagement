@@ -44,6 +44,8 @@ dependencies {
     })
 
     implementation 'com.android.support:design:28.0.0'
+    implementation 'com.razorpay:checkout:1.5.12'
+
 
     //implementation 'com.google.firebase:firebase-core:16.0.4'
     // for real-time database
