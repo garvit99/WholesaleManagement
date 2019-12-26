@@ -26,16 +26,16 @@ public class CartActivity extends AppCompatActivity {
 
 
         Item[] myListData = new Item[] {
-                new Item("Product A",R.drawable.a,1,0),
-                new Item("Product B",R.drawable.b,2,0),
-                new Item("Product C",R.drawable.c,30,0),
-                new Item("Product D",R.drawable.d,40,0),
-                new Item("Product E",R.drawable.e,50,0),
-                new Item("Product F",R.drawable.a,10,0),
-                new Item("Product g",R.drawable.b,20,0),
-                new Item("Product H",R.drawable.c,30,0),
-                new Item("Product I",R.drawable.d,40,0),
-                new Item("Product J",R.drawable.e,50,0),
+                new Item("Vaseline(12 Packs)",R.drawable.bodylotion,1400,0),
+                new Item("Frooti(120 Packs)",R.drawable.frooti,1050,0),
+                new Item("Parachute Hair Oil(30 Packs)",R.drawable.hairoil,1500,0),
+                new Item("Kurkure(50 Packs)",R.drawable.kurkure,900,0),
+                new Item("Lays(50 Packs)",R.drawable.lays,900,0),
+                new Item("Maggi(50 Packs)",R.drawable.maggi,1200,0),
+                new Item("Apsara HB pencil(50 Box)",R.drawable.pencil,1200,0),
+                new Item("Haldiram Sev(30 Packs)",R.drawable.sev,2600,0),
+                new Item("Dettol Soap(50 Packs)",R.drawable.soap,1400,0),
+                new Item("Colgate(80 Packs)",R.drawable.toothpaste,2300,0),
         };
 
 

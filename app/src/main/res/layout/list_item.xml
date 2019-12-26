@@ -14,11 +14,11 @@
 
     <TextView
         android:id="@+id/name"
-        android:layout_width="140dp"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_toRightOf="@id/image"
         android:gravity="center_vertical"
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/price"
@@ -36,7 +36,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="119dp"
         android:layout_marginLeft="119dp"
-
         android:layout_toEndOf="@id/price"
         android:layout_toRightOf="@id/price"
         android:gravity="center_vertical"
