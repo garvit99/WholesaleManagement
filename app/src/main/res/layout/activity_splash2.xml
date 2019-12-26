@@ -9,5 +9,5 @@
         android:id="@+id/imageView"
         android:layout_width="428dp"
         android:layout_height="654dp"
-        android:src="@drawable/main" />
+        android:src="@drawable/image1" />
 </LinearLayout>

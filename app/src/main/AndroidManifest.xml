@@ -40,7 +40,7 @@
         <activity android:name=".TakeATourActivity" />
         <meta-data
             android:name="com.razorpay.ApiKey"
-            android:value="rzp_test_EHb60eN292iT1q"
+            android:value="rzp_test_ZJ0Vewn9pJsrW6"
             />
     </application>
 
